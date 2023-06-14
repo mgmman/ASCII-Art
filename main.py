@@ -23,6 +23,9 @@ class ASCIIArtConvertor:
                 res[i][j] = (0.299 * pixel[0] + 0.587 * pixel[1] + 0.114 * pixel[2])
         return res
 
+    def resize(self, image, width, height):
+        return image.resize((width, height))
+
 
 if __name__ == '__main__':
     image = Image.open('wikipedia.png')
