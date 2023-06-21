@@ -6,6 +6,9 @@ class ASCIIArtConvertor:
         self.palette = [' ', '.', ',', '-', '^', '+', 'r', '*', ';', '|', '/', ')', 'T', 'R', 'B', '4', '@']
         self.palette.reverse()
 
+    def load_image(self, file_name):
+        return Image.open(file_name)
+
     def convert_to_ascii_art(self, image):
         res = ''
         for j in range(len(image[0])):
@@ -28,7 +31,8 @@ class ASCIIArtConvertor:
 
 
 if __name__ == '__main__':
-    image = Image.open('wikipedia.png')
+    image = Image.open('test1.png')
     convertor = ASCIIArtConvertor()
     with open('output.txt', 'w') as f:
+        image = convertor.resize(image, 100, 100)
         print(convertor.convert_to_ascii_art(convertor.convert_to_greyscale(image)), file=f)
