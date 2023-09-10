@@ -28,6 +28,18 @@ class ASCIIArtConvertorTests(unittest.TestCase):
         expected_result = "R/r\nT|+\n)*-\n"
         self.assertEqual(ascii_art, expected_result)
 
+    def test_resize2(self):
+        image = Image.new('RGB', (100, 100), (255, 0, 0))
+
+        resized_image = self.convertor.resize(image, 50, 50)
+
+        self.assertEqual(resized_image.size, (50, 50))
+
+        for i in range(resized_image.size[0]):
+            for j in range(resized_image.size[1]):
+                pixel = resized_image.getpixel((i, j))
+                self.assertEqual(pixel, (255, 0, 0))
+
 
 if __name__ == '__main__':
     unittest.main()

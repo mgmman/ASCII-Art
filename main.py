@@ -27,11 +27,29 @@ class ASCIIArtConvertor:
         return res
 
     def resize(self, image, width, height):
-        return image.resize((width, height))
+        current_width, current_height = image.size
+
+        new_width = width
+        new_height = height
+
+        new_image = Image.new('RGB', (new_width, new_height))
+
+        ratio_width = current_width / new_width
+        ratio_height = current_height / new_height
+
+        for i in range(new_width):
+            for j in range(new_height):
+                source_x = int(i * ratio_width)
+                source_y = int(j * ratio_height)
+
+                pixel = image.getpixel((source_x, source_y))
+                new_image.putpixel((i, j), pixel)
+
+        return new_image
 
 
 if __name__ == '__main__':
-    image = Image.open('heart 600-600.png')
+    image = Image.open('test2.png')
     convertor = ASCIIArtConvertor()
     with open('output.txt', 'w') as f:
         image = convertor.resize(image, 600, 600)
