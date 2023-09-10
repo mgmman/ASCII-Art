@@ -31,7 +31,7 @@ class Viewer:
         root.mainloop()
 
     def generate(self):
-        width, height = 100, 100
+        width, height = 600, 600
         if self.size_input.get() != '':
             width, height = map(int, self.size_input.get().split(','))
         image = self.convertor.load_image(self.file_name_input.get())

@@ -20,10 +20,10 @@ class ASCIIArtConvertor:
 
     def convert_to_greyscale(self, image: Image):
         res = [[0] * image.size[0] for _ in range(image.size[1])]
-        for j in range(image.size[1] - 1):
-            for i in range(image.size[0] - 1):
+        for j in range(image.size[1]):
+            for i in range(image.size[0]):
                 pixel = image.getpixel((i, j))
-                res[i][j] = (0.299 * pixel[0] + 0.587 * pixel[1] + 0.114 * pixel[2])
+                res[j][i] = (0.299 * pixel[0] + 0.587 * pixel[1] + 0.114 * pixel[2])
         return res
 
     def resize(self, image, width, height):
@@ -31,8 +31,8 @@ class ASCIIArtConvertor:
 
 
 if __name__ == '__main__':
-    image = Image.open('test1.png')
+    image = Image.open('heart 600-600.png')
     convertor = ASCIIArtConvertor()
     with open('output.txt', 'w') as f:
-        image = convertor.resize(image, 100, 100)
+        image = convertor.resize(image, 600, 600)
         print(convertor.convert_to_ascii_art(convertor.convert_to_greyscale(image)), file=f)
